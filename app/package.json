@@ -13,7 +13,7 @@
     "@vuelidate/core": "^2.0.3",
     "@vuelidate/validators": "^2.0.4",
     "@vueuse/core": "^13.6.0",
-    "axios": "^1.11.0",
+    "axios": "^1.12.2",
     "json-server": "^1.0.0-beta.3",
     "pinia": "^3.0.3",
     "postcss": "^8.5.6",
