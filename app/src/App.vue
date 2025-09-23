@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen bg-white">
     <Header />
-    <div class="mt-4">
+    <div class="mt-0">
       <RouterView />
       <!-- LOGIN MODAL -->      
       <div
