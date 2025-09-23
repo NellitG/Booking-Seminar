@@ -1,120 +1,138 @@
 <template>
   <div
-    class="bg-white p-4 rounded-md border border-gray-400 shadow-2xl max-w-7xl"
+    class="flex min-h-screen w-screen items-center justify-center text-gray-600 bg-gray-50"
   >
-    <p class="text-xl text-center p-4">Log in to access your account</p>
-    <div>
-      <form @submit.prevent="onSubmit">
-        <p class="p-2 text-lg">E-mail</p>
-        <input
-          type="text"
-          v-model="formData.email"
-          :class="{ 'border-2 border-red-500': v$.email.$error }"
-          name="enter your email address"
-          id="LoginEmail"
-          class="w-full md:w-[350px] border border-gray-400 p-2 rounded-md"
-        />
-        <p>
-          <span
-            v-for="error in v$.email.$errors"
-            :key="error.$uid"
-            class="text-red-500"
-            >{{ error.$message }}</span
+    <div class="relative">
+      <div
+        class="hidden sm:block h-56 w-56 text-orange-300 absolute a-z-10 -left-20 -top-20"
+      > 
+      </div>
+      <div
+        class="hidden sm:block h-28 w-28 text-orange-300 absolute a-z-10 -right-20 -bottom-20"
+      >
+      </div>
+      <!-- Register -->
+      <div
+        class="relative flex flex-col sm:w-[30rem] rounded-lg border-gray-400 bg-green-100 shadow-lg px-4"
+      >
+        <div class="flex-auto p-6">
+          <!-- Logo -->
+          <div
+            class="mb-10 flex flex-shrink-0 flex-grow-0 items-center justify-center overflow-hidden"
           >
-        </p>
-        <p class="p-2 text-lg">Password</p>
-        <input
-          type="password"
-          v-model="formData.password"
-          :class="{ 'border-2 border-red-500': v$.password.$error }"
-          name="Enter your password"
-          id="LoginPassword"
-          class="w-full md:w-[350px] border border-gray-400 p-2 rounded-md"
-        />
-        <p>
-          <span
-            v-for="error in v$.password.$errors"
-            :key="error.$uid"
-            class="text-red-500"
-            >{{ error.$message }}</span
-          >
-        </p>
-        <div class="flex justify-center items-end sticky py-8 bottom-0">
-          <button
-            class="text-white bg-green-600 px-4 py-2 rounded-md w-full"
-            :style="{
-              opacity: !v$.email.$error && !v$.password.$error ? 1 : 0.5,
-            }"
-            :disabled="!(!v$.email.$error && !v$.password.$error)"
-          >
-            login
-          </button>
+            <a
+              href="#"
+              class="flex cursor-pointer items-center gap-2 text-orange-500 no-underline hover:text-orange-500"
+            >
+              <img
+                class="h-8 mr-4"
+                src="https://airhex.com/images/airline-logos/tailwind-airlines.png"
+                alt="Your Logo"
+                width="100"
+              />
+            </a>
+          </div>
+          <!-- /Logo -->
+          <h4 class="mb-2 font-medium text-gray-700 xl:text-xl">
+            Login To Tusafiri
+          </h4>
+          <p class="mb-6 text-gray-500">Please Login to access your account</p>
+
+          <form id="" class="mb-4" action="#" method="POST">
+            <div class="mb-4">
+              <label
+                for="email"
+                class="mb-2 inline-block text-xs font-medium uppercase text-gray-700"
+                >Email</label
+              >
+              <input
+                type="text"
+                class="block w-full cursor-text appearance-none rounded-md border border-gray-400 bg--100 py-2 px-3 text-sm outline-none focus:border-orange-500 focus:bg-white focus:text-gray-600 focus:shadow"
+                id="email"
+                name="email-username"
+                placeholder="Enter your email"
+              />
+            </div>
+            <div class="mb-4">
+              <div class="flex justify-between">
+                <label
+                  class="mb-2 inline-block text-xs font-medium uppercase text-gray-700"
+                  for="password"
+                  >Password</label
+                >
+                <a
+                  href="auth-forgot-password-basic.html"
+                  class="cursor-pointer text-orange-500 no-underline hover:text-orange-500"
+                >
+                  <small class=" ">Forgot Password?</small>
+                </a>
+              </div>
+              <div class="relative flex w-full flex-wrap items-stretch">
+                <input
+                  type="password"
+                  id="password"
+                  class="relative block flex-auto cursor-text appearance-none rounded-md border border-gray-400 bg--100 py-2 px-3 text-sm outline-none focus:border-orange-500 focus:text-gray-600 focus:shadow"
+                  name="password"
+                  placeholder="············"
+                />
+              </div>
+            </div>
+            <div class="mb-4">
+              <div class="block">
+                <label class="inline-block" for="remember-me">
+                  Remember Me
+                </label>
+              </div>
+            </div>
+            <div class="mb-4">
+              <button
+                class="grid w-full cursor-pointer select-none rounded-md border border-orange-500 bg-orange-500 py-2 px-5 text-center align-middle text-sm text-black shadow hover:border-orange-600 hover:bg-orange-600 hover:text-white focus:border-orange-600 focus:bg-orange-600 focus:text-white focus:shadow-none"
+                type="submit"
+              >
+                Sign in
+              </button>
+            </div>
+          </form>
+          <br />
+
+          <p class="mb-4 text-center">
+            New on Tusafiri
+            <a
+              href="/SignUp"
+              class="cursor-pointer text-orange-500 no-underline hover:text-orange-500"
+            >
+              Create an account
+            </a>
+          </p>
         </div>
-        <div v-if="error" class="text-red-500">
-          {{ error }}
-        </div>
-      </form>
+      </div>
     </div>
   </div>
 </template>
 
-<script setup>
-import { computed, onMounted, reactive, ref } from "vue";
-import useVuelidate from "@vuelidate/core";
-import { required, email, minLength } from "@vuelidate/validators";
-import { useAuthStore } from "@/store";
+<script>
+import axios from 'axios';
 
-/**initialise the auth store */
-const authStore = useAuthStore();
-
-/**Get error from auth store */
-const error = computed(() => {
-  return authStore.error;
-});
-
-onMounted(() => {
-  //Clear the previous error
-  authStore.error = null;
-});
-
-/**Form variables */
-const formData = reactive({
-  email: "",
-  password: "",
-});
-
-const validations = computed(() => {
-  return {
-    email: { required, email },
-    password: { required, minLength: minLength(3) },
-  };
-});
-
-/**initialise form validation */
-const v$ = useVuelidate(validations, formData);
-
-/**Submit form */
-const onSubmit = async () => {
-  const result = await v$.value.$validate();
-  console.log(formData);
-
-  if (result) {
-    console.log("Form submitted");
-    return authStore.login(formData);
-  } else {
-    console.log("Form not submitted");
-  }
-};
-
-const onSubmitDemo = async () => {
-  v$.value.$validate();
-  if (v$.value.$error) return;
-
-  try {
-    await authStore.login(formData);
-  } catch (error) {
-    if (error.response && error.response.data) {
-    }
-  }
+export default {
+  data() {
+    return {
+      email: '',
+      password: '',
+    };
+  },
+  methods: {
+    async submitForm() {
+      try {
+        const response = await axios.post('http://127.0.0.1:8000/api/login', {
+          email: this.email,
+          password: this.password,
+        });
+        console.log("Login successful:", response.data);
+        this.$router.push('/landing');
+      } catch (error) {
+        console.error("Login failed:", error);
+      }
+    },
+  },
 };
 </script>
