@@ -1,5 +1,5 @@
 <template>
-  <div class="px-8">
+  <!-- <div class="px-8">
     <h1 class="text-red-700">Hi {{ user?.firstName }}!</h1>
     <p>You're logged in with Vue 3 + Pinia & JWT!!</p>
     <h3>Users from secure api end point:</h3>
@@ -25,7 +25,7 @@
     >
       Logout
     </button>
-  </div>
+  </div> -->
 </template>
 
 <script setup>
